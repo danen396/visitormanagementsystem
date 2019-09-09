@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <!--Fuck Internet Explorer-->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Visitor Managment </title>
+   <meta name="author" content="Hitesh Sahu"/>
+
+   <!--PWA MAnifest-->
+   <link rel="manifest" href="./manifest.json" />
+
+   <!-- Chrome, Firefox OS and Opera theme color-->
+   <meta name="theme-color" content="#0d47a1">
+
+   <!--Change the status bar appearance in iOS devices-->
+   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+   <meta name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+   <!-- icon in the highest resolution, Chrome and Opera uses icon.png, which is scaled to the necessary size by the device. -->
+   <link rel="icon" sizes="192x192" href="./assets/img/icon.png">
+   <!-- reuse same icon for Safari and add more supported size for other iOS devices-->
+   <link rel="apple-touch-icon" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/icon.png">
+   <!-- multiple icons for IE -->
+   <meta name="msapplication-square70x70logo" content="./assets/img/icon.png">
+   <meta name="msapplication-square150x150logo" content="./assets/img/icon.png">
+   <meta name="msapplication-wide310x150logo" content="./assets/img/icon.png">
+   <!-- apple-->
+   <link rel="apple-touch-startup-image" href="./assets/img/icon.png">
+  <!--------------------------- CSS ------------------------------->
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+   <!--Let browser know website is optimized for mobile-->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Font Awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!--Custom SetUp-->
+    <link rel="stylesheet" href="./styles/style.css">
+
+    <!---------------------------FIREBASE------------------------------->
+    <script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+ </head>
+
+<body >
+
+<div ng-app="Vistor Managment" ng-controller="CategoryCtrl"  class="app">
+
+<!--HEADER Starts-->
+<div id="index-banner">
+
+  <div class="navbar-fixed">
+   <nav class="blue" role="navigation nav-extended">
+      <div class="nav-wrapper">
+          <a id="logo-container" href="#" class="brand-logo yellow_fire ">Home</a>
+          <ul class="right hide-on-med-and-down">
+              <li><a href="#" class="white-text">Status<i
+                      class="material-icons left white-text">assignment</i></a>
+              </li>
+
+              <li><a href="form.html" class="white-text">Assignment<i
+                      class="material-icons left white-text">assignment_ind</i></a>
+              </li>
+
+              <li><a href="report.html" class="white-text">Report<i
+                    class="material-icons left white-text">timeline</i></a>
+              </li>
+
+              <li><a href="about.html" class="white-text"><i
+                      class="material-icons left white-text">info_outline</i>Help & Support</a>
+              </li>
+              <li><a href="#" onclick="signOut()" class="white-text">Log Out<i
+                      class="material-icons text-info left white-text">lock_open</i></a>
+              </li>
+          </ul>
+
+          <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i
+                  class="material-icons">menu</i></a>
+      </div>
+      <div class="nav-content">
+
+          <a class="btn-floating btn-large yellow darken-2 halfway-fab waves-effect waves-light">
+            <i class="large material-icons">search</i>
+          </a>
+
+    </div>
+  </nav>
+</div>
+
+  <!--Mobile only menu-->
+
+  <ul id="nav-mobile" class="side-nav">
+      <li ><div class="userView">
+          <div class="background">
+              <img src="./assets/img/header/head_drawer.png">
+          </div>
+          <a href="#updateProfileModal"  class="modal-trigger"><img  id ="profile_pic" class="circle " src="./assets/img/PlaceHolder/user_place_holder.png"></a>
+          <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_name" class="white-text name  ">User name</span></a>
+          <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_mail" class="white-text email  ">Email ID</span></a>
+      </div></li>
+      <li><a href="#" class="blue-text">Status<i
+              class="material-icons left blue-text">assignment</i></a>
+      </li>
+      <li><a href="form.html" class="blue-text">Assignment<i
+              class="material-icons left blue-text">assignment_ind</i></a>
+      </li>
+
+      <li><a href="report.html" class="blue-text">Reports<i
+              class="material-icons left blue-text">timeline</i></a>
+      </li>
+
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Communicate</a></li>
+
+      <li><a href="about.html" class="blue-text"><i
+              class="material-icons left blue-text">info_outline</i>Help & Support</a>
+      </li>
+      <li><a href="#" onclick="signOut()" class="blue-text">Log Out<i
+              class="material-icons text-info left blue-text">lock_open</i></a>
+      </li>
+
+  </ul>
+</div>
+<!--HEADER Ends-->
+
+<Main>
+          <!-- Switch -->
+          <div class="switch" ng-init="showGrid = true">
+            <label>
+              List Mode
+              <input type="checkbox"  checked ={{showGrid}} ng-model="showGrid">
+              <span class="lever"></span>
+              Grid Mode
+            </label>
+          </div>
+
+  <!--List Starts-->
+      <div class="row" ng-if="showGrid == false">
+        <div ng-repeat="item in messages">
+            <!--Card Starts-->
+        <div class="col s10 offset-s1 card-panel" style="padding: 2px">
+
+          <!--Card Image-->
+           <div class="card-image valign-wrapper col s4" >
+               <div class="valign">
+                    <img class="responsive-img media_image" style="max-height: 150px" src="./assets/img/PlaceHolder/user_place_holder.png" />
+               </div>
+           </div>
+
+           <!--Card Contents-->
+          <div  class ='col s8 card-content'>
+               <h5 class="grey-text">Module Name</h5>
+               <p>Module Info.</p>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+        <!--Card End-->
+      </div>
+    </div>
+      <!--List Ends-->
+
+  <!--Grid Starts-->
+  <div class="row container" ng-if="showGrid == true">
+    <div class="col s12 m4 l3" ng-repeat="item in messages">
+        <!--Card Starts-->
+          <div  class="card">
+            <div class="card-image">
+              <img src="./assets/img/PlaceHolder/user_place_holder.png">
+              <span class="card-title">Module Name</span>
+            </div>
+            <div class="card-content">
+              <p>Module Info</p>
+              <div class="chip">Tag</div><div class="chip">Tag</div> <div class="chip">Tag</div> <div class="chip">Tag</div>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+         <!--Card End-->
+
+        </div>
+      </div>
+  <!--Grid End-->
+
+<!--Footer-->
+<footer class="page-footer">
+    <div class="container white-text">
+        <h5 class="white-text">Visitor Managment </h5>
+        <p>Visitor Managment  App build with HTML5, AngularJS, Spring Hibernate. </p>
+    </div>
+
+    <div class="container">
+              <div class="row">
+
+                   <div class="col s1">
+                     <a href = https://github.com/hiteshsahu
+                     class ="tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="GitHub" target="_blank">
+                     <i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= https://www.linkedin.com/in/hitesh-sahu-99639040
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="Linkedin" target="_blank">
+                    <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=http://stackoverflow.com/users/2252113/hitesh-sahu
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="StackOverflow"  target="_blank" >
+                    <i class="fa fa-stack-overflow fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://codepen.io/hiteshsahu/
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Codepen"
+                      target="_blank" >
+                      <i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://twitter.com/HiteshSahu_" class="tooltipped white-text"
+                     data-position="bottom" data-delay="50" data-tooltip="Twitter"
+                    target="_blank">
+                    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://www.facebook.com/HitsDroid
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50" data-tooltip="Facebook"
+                     target="_blank">
+                     <i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://plus.google.com/u/0/+HiteshSahu7
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="Google plus"  target="_blank">
+                    <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
+                  </div>
+
+             </div>
+             </div>
+       <div class="footer-copyright darken-4 ">
+           <div class="container">
+                    ©2017 <a class="brown-text text-lighten-3" href="http://hiteshsahu.com:">Hitesh Sahu All
+                    rights reserved.</a> |  <a href="#">Help</a> | <a href="#">Privacy & Terms</a>
+           </div>
+       </div>
+</footer>
+
+
+  <!-- Modal Structure -->
+ <div id="updateProfileModal" class="modal bottom-sheet">
+     <div class="modal-content">
+         <div class="card-reveal">
+             <div class="row center-align">
+             <span class="card-title grey-text text-darken-4">Reset Password<i
+                     class="material-icons right modal-action modal-close">close</i></span>
+                 <div class="input-field col s12">
+                     <i class="material-icons prefix center">account_circle</i>
+                     <input id="id_user_name" type="text" class="validate left-align"
+                            required="required" placeholder="User Name"/>
+                     <label for="id_user_name" class="left-align">Please enter user name</label>
+                 </div>
+                 <div class="input-field col s12">
+                     <i class="fa fa-picture-o prefix center" aria-hidden="true"></i>
+                     <input type="file" id="files" name="files[]" multiple class = "left-align"
+                          />
+                </div>
+                 <div class=" col s12">
+                 <output id="list"></output>
+                 </div>
+         </div>
+     </div>
+     <div class="modal-footer center-align">
+         <a href="#!" class="modal-action modal-close waves-effect waves-green btn green"
+            style="margin-left:10px">CANCEL</a>
+         <input type="button" class="modal-action modal-close waves-effect waves-light btn blue" value="SAVE"
+                id="resetPassword" onclick="updateUser()" />
+     </div>
+  </div>
+  </div>
+  <!--Modal Ends-->
+
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!--Initalize MaterializeCSS-->
+<script src="./scripts/init.js"></script>
+
+<!--PhoneGap Scripts-->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</body>
+
+
+ <script>
+     //Global Variables
+     var imagePath = 'https://i6.fuskator.com/large/l4bDokX55UX/image-2.jpg';
+
+    angular.module('Vistor Managment',[]).controller('CategoryCtrl', function($scope) {
+
+      //Variables
+      $scope.productQuantity = 0;
+      $scope.messages = [{
+          face : imagePath,
+          what: 'Food & Beverages',
+          who: 'Min Li Chan',
+          when: '3:08PM',
+          notes: " I'll be in your neighborhood doing errands"
+        }, {
+          face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Tori_Black_AVN_2010.jpg/200px-Tori_Black_AVN_2010.jpg',
+          what: 'Brunch this weekend?',
+          who: 'Min Li Chan',
+          when: '3:08PM',
+          notes: " I'll be in your neighborhood doing errands"
+        }, {
+          face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tori_Black_at_FAME_Awards_2010.jpg/200px-Tori_Black_at_FAME_Awards_2010.jpg',
+          what: 'Brunch this weekend?',
+          who: 'Min Li Chan',
+          when: '3:08PM',
+          notes: " I'll be in your neighborhood doing errands"
+        }, {
+          face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Tori_Black_2014.jpg/220px-Tori_Black_2014.jpg',
+          what: 'Brunch this weekend?',
+          who: 'Min Li Chan',
+          when: '3:08PM',
+          notes: " I'll be in your neighborhood doing errands"
+        }];
+
+       //Functions
+     $scope.increaseQuantity = function() {
+          $scope.productQuantity = $scope.productQuantity+1;
+        };
+      $scope.decreaseQuantity = function() {
+           $scope.productQuantity!=0 ? $scope.productQuantity = $scope.productQuantity-1: $scope.productQuantity = 0;
+        };
+    });
+
+         // Initialize Firebase
+         var config = {
+           apiKey: "AIzaSyAnp5M7JKSQVsmRQF1A_luz43U2DFStQ6I",
+           authDomain: "ecart-1d0ca.firebaseapp.com",
+           databaseURL: "https://ecart-1d0ca.firebaseio.com",
+           projectId: "ecart-1d0ca",
+           storageBucket: "ecart-1d0ca.appspot.com",
+           messagingSenderId: "404598332603"
+         };
+         firebase.initializeApp(config);
+         var user = firebase.auth().currentUser;
+
+         //Handle profile Pic selection
+         function handleFileSelect(evt) {
+                        var files = evt.target.files; // FileList object
+                        // Loop through the FileList and render image files as thumbnails.
+                        for (var i = 0, f; f = files[i]; i++) {
+                          // Only process image files.
+                          if (!f.type.match('image.*')) {
+                            continue;
+                          }
+                          var reader = new FileReader();
+                          // Closure to capture the file information.
+                          reader.onload = (function(theFile) {
+                            return function(e) {
+                              // Render thumbnail.
+                             /* var span = document.createElement('span');
+                              span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                                '" title="', escape(theFile.name), '"/>'].join('');
+                              document.getElementById('list').insertBefore(span, null); */
+                              $("#profile_pic").attr("src",  e.target.result);
+                                // Check browser support
+                                if (typeof(Storage) !== "undefined") {
+                                  user = firebase.auth().currentUser;
+                                   if (user != null) {
+                                     Materialize.toast('Profile Pic updated' , 2000, 'rounded');
+                                    // Store
+                                    localStorage.setItem(user.uid, e.target.result);
+                                     }
+                                } else {
+                                    Materialize.toast('Unable to set image, your web browser is not supported' , 2000, 'rounded');
+                                }
+                            };
+          })(f);
+                  // Read in the image file as a data URL.
+                   reader.readAsDataURL(f);
+           }
+         }
+
+
+         document.getElementById('files').addEventListener('change', handleFileSelect, false);
+         //get current signed in user credentials
+         function getUser(){
+              var user = firebase.auth().currentUser;
+              if (user != null) {
+                   $("#id_user_name").val(user.displayName);
+                   $("#user_name").text(user.displayName);
+                   $("#user_mail").text(user.email);
+                  // Retrieve image path from web storage
+                  $("#profile_pic").attr("src",  localStorage.getItem(user.uid));
+              }
+             }
+
+         //update user profile
+         function updateUser()
+         {
+          var user = firebase.auth().currentUser;
+          user.updateProfile({
+            displayName:document.getElementById("id_user_name").value
+           //  photoURL: "https://example.com/jane-q-user/profile.jpg"
+          }).then(function() {
+            // Update successful.
+              Materialize.toast('Profile updated' , 2000, 'rounded');
+          }, function(error) {
+            // An error happened.
+               var errorCode = error.code;
+               var errorMessage = error.message;
+               Materialize.toast('Update Profile Failed:'+ errorMessage, 4000, 'rounded');
+          });
+
+         }
+
+        //Sign Up new User
+        function signOut()
+              {
+                firebase.auth().signOut().then(function() {
+                   // Sign-out successful.
+                   // Redirecting to other page.
+                    Materialize.toast('Signing Off:', 2000, 'rounded');
+                    window.location = "index.html";
+                     }).catch(function(error) {
+                    // An error happened.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                  Materialize.toast('Sign Up Failed:'+ errorMessage, 4000, 'rounded');
+                });
+              };
+</script>
+
+</body>
+</html>

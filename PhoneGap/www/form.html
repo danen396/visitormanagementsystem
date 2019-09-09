@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Vistor Managment|About</title>
+  <meta name="author" content="Hitesh Sahu"/>
+
+  <!--Fuck Internet Explorer-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <!--PWA MAnifest-->
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Chrome, Firefox OS and Opera theme color-->
+  <meta name="theme-color" content="#0d47a1">
+
+  <!--Change the status bar appearance in iOS devices-->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+  "/>
+  <!-- icon in the highest resolution, Chrome and Opera uses icon.png, which is scaled to the necessary size by the device. -->
+  <link rel="icon" sizes="192x192" href="./assets/img/icon.png">
+  <!-- reuse same icon for Safari and add more supported size for other iOS devices-->
+  <link rel="apple-touch-icon" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/icon.png">
+  <!-- multiple icons for IE -->
+  <meta name="msapplication-square70x70logo" content="./assets/img/icon.png">
+  <meta name="msapplication-square150x150logo" content="./assets/img/icon.png">
+  <meta name="msapplication-wide310x150logo" content="./assets/img/icon.png">
+  <!-- apple-->
+  <link rel="apple-touch-startup-image" href="./assets/img/icon.png">
+
+    <!---------------------------CSS ------------------------------->
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+     <!--Let browser know website is optimized for mobile-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Font Awesome-->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            type="text/css" rel="stylesheet" media="screen,projection"/>
+      <!--Custom SetUp-->
+      <link rel="stylesheet" href="./styles/style.css">
+
+    <!---------------------------FIREBASE------------------------------->
+    <script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+
+</head>
+    <body class="white">
+    <div id="index-banner">
+    <div class="navbar-fixed" id= "AppBar">
+      <nav role="navigation">
+          <div class="nav-wrapper">
+              <a id="logo-container" href="#" class="brand-logo yellow_fire ">Vistor Managment</a>
+              <ul class="right hide-on-med-and-down">
+                  <li><a href="home.html" class="white-text">Register<i
+                          class="material-icons left white-text">assignment</i></a>
+                  </li>
+
+                  <li><a href="form.html" class="white-text">Assignment<i
+                          class="material-icons left white-text">assignment_ind</i></a>
+                  </li>
+
+                  <li><a href="report.html" class="white-text">Reports<i
+                        class="material-icons left white-text">timeline</i></a>
+                  </li>
+
+                  <li><a href="#" class="white-text"><i
+                          class="material-icons left white-text">info_outline</i>Help & Support</a>
+                  </li>
+                  <li><a href="#" onclick="signOut()" class="white-text">Log Out<i
+                          class="material-icons text-info left white-text">lock_open</i></a>
+                  </li>
+              </ul>
+
+              <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i
+                      class="material-icons">menu</i></a>
+          </div>
+      </nav>
+    </div>
+
+    <!--Mobile Only Menu-->
+      <ul id="nav-mobile" class="side-nav">
+          <li ><div class="userView">
+              <div class="background">
+                  <img src="./assets/img/header/head_drawer.png">
+              </div>
+              <a href="#updateProfileModal"  class="modal-trigger"><img  id ="profile_pic" class="circle " src="./assets/img/PlaceHolder/user_place_holder.png"></a>
+              <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_name" class="white-text name  ">User name</span></a>
+              <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_mail" class="white-text email  ">Email ID</span></a>
+          </div></li>
+          <li><a href="home.html" class="blue-text">Visitors<i
+                  class="material-icons left blue-text">assignment</i></a>
+          </li>
+          <li><a href="form.html" class="blue-text">Assignment<i
+                  class="material-icons left blue-text">assignment_ind</i></a>
+          </li>
+
+          <li><a href="report.html" class="blue-text">Reports<i
+                  class="material-icons left blue-text">timeline</i></a>
+          </li>
+
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Communicate</a></li>
+
+          <li><a href="#" class="blue-text"><i
+                  class="material-icons left blue-text">info_outline</i>Help & Support</a>
+          </li>
+          <li><a href="#" onclick="signOut()" class="blue-text">Log Out<i
+                  class="material-icons text-info left blue-text">lock_open</i></a>
+          </li>
+      </ul>
+</div>
+
+
+<div class="progress" id="progress_bar">
+    <div class="indeterminate"></div>
+</div>
+
+<div>
+    <div class="row main white" style="min-height:750px">
+        <div class="col s12">
+            <ul class="tabs ">
+                <li class="tab col s3"><a href="#test1" class="active ">Add Visitor</a>
+                </li>
+                <li class="tab col s3"><a href="#test2" >Add Society Member</a></li>
+
+            </ul>
+        </div>
+        <div id="test1" class="col s12">
+
+
+            <div class="card-panel hoverable z-depth-2">
+
+                <h5 class="center grey-text">Insert Visitor Info</h5>
+                <br/>
+
+                <div class="row">
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h5 class="header">Visitor Information</h5>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="txtStrCustName" type="text" class="validate"
+                                   required="required">
+                            <label for="txtStrCustName">Visitor Name</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">store</i>
+                            <input id="txtStrCustDepartment" type="text" class="validate">
+                            <label for="txtStrCustDepartment">Visitor Address</label>
+                        </div>
+
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="txtStrCustContactNo" type="tel" class="validate">
+                        <label for="txtStrCustContactNo">Visitor Contact No</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="txtStrCustEmail" type="email" class="validate">
+                        <label for="txtStrCustEmail" data-error="wrong" data-success="right">Visitor
+                            Email</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <p class="grey-text">Please select pass Type</p>
+                        <select single id="txtStrInstalledVersion">
+                            <option value="" disabled selected>Choose Pass Type</option>
+                            <option value="PERM">Regular</option>
+                            <option value="NEW">New</option>
+                            <option value="TEMP">Temperory</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">contacts</i>
+                        <input id="txtSalesEnggName" type="text" class="validate">
+                        <label for="txtSalesEnggName">Pass ID*</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">directions_car</i>
+                        <input id="txtStrCustContactNo" type="tel" class="validate">
+                        <label for="txtStrCustContactNo">Vehicle Number</label>
+                    </div>
+                </div>
+
+                    <div class="row">
+
+                        <div class="input-field col s12">
+                            <h5 class="header">Contact Person Information</h5>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                          <div class="input-field col s6">
+                              <i class="material-icons prefix">account_circle</i>
+                              <input id="txtStrCustName" type="text" class="validate"
+                                     required="required">
+                              <label for="txtStrCustName">Contact Person Name</label>
+                          </div>
+
+                          <div class="input-field col s6">
+                              <i class="material-icons prefix">work</i>
+                              <input id="txtStrCustDesignation" type="text" class="validate">
+                              <label for="txtStrCustDesignation"> Department/Office</label>
+                          </div>
+
+                      <div class="input-field col s6">
+                          <i class="material-icons prefix">domain</i>
+                          <input id="txtStrCustDesignation" type="text" class="validate">
+                          <label for="txtStrCustDesignation">Building/Flat Number</label>
+                      </div>
+
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">phonelink_ring</i>
+                            <input id="txtStrCustMobile" type="tel" class="validate">
+                            <label for="txtStrCustMobile">Contact Mobile</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">message</i>
+                            <textarea id="txtStrComments" class="materialize-textarea"></textarea>
+                            <label for="txtStrComments">Purpose Of Meeting</label>
+                        </div>
+                    </div>
+
+                <!--Guard Info-->
+                <div class="row">
+
+                    <div class="input-field col s6">
+                        <h5 class="header">Guard On Duty</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="input-field col s12">
+                      <i class="material-icons prefix">contacts</i>
+                      <input id="txtSalesEnggName" type="text" class="validate">
+                      <label for="txtSalesEnggName">Pass Created By (Guard Name)</label>
+                  </div>
+
+                  <div class="input-field col s12">
+                      <i class="material-icons prefix">priority_high</i>
+                      <input id="txtSalesEnggName" type="text" class="validate">
+                      <label for="txtSalesEnggName">Gate Number</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">alarm</i>
+                      <label for="EntryTime">Entry Time</label>
+                      <input id="EntryTime" type="text" class="timepicker">
+                  </div>
+
+
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">event</i>
+                      <label for="EntryTime">Entry Date</label>
+                      <input id="EntryTime" type="text" class="datepicker">
+                  </div>
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class=" col s12">
+                        <div class="center">
+                            <a href= "#sendNotificationModal" class="btn waves-effect waves-light red center btn-large tooltipped  modal-trigger" type="submit"
+                                    name="action" id="btnCFB" data-position="bottom" data-delay="50" data-tooltip="Submit Visitor Info">
+                                Submit
+                                <i class="material-icons right">send</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class=" col s12 " id="divCFB">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Camera-->
+            <div class="fixed-action-btn">
+             <a  href="#takePicModal" class="btn-floating btn-large orange tooltipped modal-trigger waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Take Picture">
+               <i class="large material-icons">photo_camera</i>
+              </a>
+           </div>
+
+        </div>
+        <div id="test2" class="col s12">
+
+            <div class="card-panel z-depth-2 hoverable">
+
+                <h5 class="center grey-text">Get Todays Enries</h5>
+                <br/>
+
+                <div class="center">
+                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                            id="btnGet">
+                        View Feedbacks
+                        <i class="material-icons right">system_update_alt</i>
+                    </button>
+                </div>
+
+                <br/>
+                <div class="input-field ">
+                    <i class="material-icons prefix">search</i>
+                    <input id="myInput" onkeyup='searchTable()' type='text'
+                           placeholder="Type to Filter">
+                    <label for="txtStrClusterName">Search Fedback</label>
+                </div>
+
+                <div id="divCFB_D" class="row"/>
+
+            </div>
+        </div>
+
+    </div>
+
+<!--Footer-->
+<footer class="page-footer">
+    <div class="container white-text">
+        <h5 class="white-text">Vistor Managment</h5>
+        <p>Visitor Mangment App build with HTML5, AngularJS, Spring Hibernate. </p>
+    </div>
+
+    <div class="container">
+              <div class="row">
+
+                   <div class="col s1">
+                     <a href = https://github.com/hiteshsahu
+                     class ="tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="GitHub" target="_blank">
+                     <i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= https://www.linkedin.com/in/hitesh-sahu-99639040
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="Linkedin" target="_blank">
+                    <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=http://stackoverflow.com/users/2252113/hitesh-sahu
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="StackOverflow"  target="_blank" >
+                    <i class="fa fa-stack-overflow fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://codepen.io/hiteshsahu/
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Codepen"
+                      target="_blank" >
+                      <i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://twitter.com/HiteshSahu_" class="tooltipped white-text"
+                     data-position="bottom" data-delay="50" data-tooltip="Twitter"
+                    target="_blank">
+                    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://www.facebook.com/HitsDroid
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50" data-tooltip="Facebook"
+                     target="_blank">
+                     <i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://plus.google.com/u/0/+HiteshSahu7
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="Google plus"  target="_blank">
+                    <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
+                  </div>
+
+             </div>
+             </div>
+       <div class="footer-copyright darken-4 ">
+           <div class="container">
+                    ©2017 <a class="brown-text text-lighten-3" href="http://hiteshsahu.com:">Hitesh Sahu All
+                    rights reserved.</a> |  <a href="#">Help</a> | <a href="#">Privacy & Terms</a>
+           </div>
+       </div>
+</footer>
+
+<!-- Modal Structure -->
+<div id="takePicModal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4>Take a Picture</h4>
+        <p>Please turn On Your Web Camera and ask Visitor Stand In front of It</p>
+
+        <button  onclick="startCamera()" data-position="bottom" data-delay="50" data-tooltip="Start Camera"
+        class="waves-effect waves-light orange tooltipped btn-large">Click to Start Camera<i class="material-icons right">photo_camera</i></button>
+
+        <div class="row">
+
+             <div class="col s12">
+                   <div class="card">
+                     <div class="card-image center grey">
+                       <video id="video" width="640" height="480"  autoplay class='grey'></video>
+                       <a  id="snap"  data-position="bottom" data-delay="50" data-tooltip="Take Pic"
+                       class="btn-floating halfway-fab waves-effect waves-light red tooltipped btn-large"><i class="material-icons">camera</i></a>
+                       <span class="card-title">Live Preview</span>
+                     </div>
+                     <div class="card-content">
+                       <p>Start Camera and Click on Take Pic.</p>
+                     </div>
+                   </div>
+                 </div>
+
+
+
+             <div class= "col s12 ">
+               <div class="card">
+                 <div class="card-image center grey">
+                   <canvas id="canvas" width="640" height="480" ></canvas>
+                 </div>
+               </div>
+             </div>
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!"
+           class=" modal-action modal-close waves-effect waves-green btn waves-effect waves-light center"><i
+                class="material-icons left">done</i>DONE</a>
+    </div>
+</div>
+
+
+  <!-- Modal Structures -->
+ <div id="updateProfileModal" class="modal bottom-sheet">
+     <div class="modal-content">
+         <div class="card-reveal">
+             <div class="row center-align">
+             <span class="card-title grey-text text-darken-4">Reset Password<i
+                     class="material-icons right modal-action modal-close">close</i></span>
+                 <div class="input-field col s12">
+                     <i class="material-icons prefix center">account_circle</i>
+                     <input id="id_user_name" type="text" class="validate left-align"
+                            required="required" placeholder="User Name"/>
+                     <label for="id_user_name" class="left-align">Please enter user name</label>
+                 </div>
+                 <div class="input-field col s12">
+                     <i class="fa fa-picture-o prefix center" aria-hidden="true"></i>
+                     <input type="file" id="files" name="files[]" multiple class = "left-align"
+                          />
+                </div>
+                 <div class=" col s12">
+                 <output id="list"></output>
+                 </div>
+         </div>
+     </div>
+     <div class="modal-footer center-align">
+         <a href="#!" class="modal-action modal-close waves-effect waves-green btn green"
+            style="margin-left:10px">CANCEL</a>
+         <input type="button" class="modal-action modal-close waves-effect waves-light btn blue" value="SAVE"
+                id="resetPassword" onclick="updateUser()" />
+     </div>
+  </div>
+  </div>
+
+      <!-- Modal Structure -->
+      <div id="sendNotificationModal" class="modal">
+          <div class="modal-content">
+              <h4>Feedback Submitted </h4>
+              <p>Would You Like to Send a Notification to the Contact Person ? <br/><b>Press "Send" to compose a Mail or press "Cancel" to dismiss.</b>b></p>
+          </div>
+          <div class="modal-footer">
+
+              <a href="#!"  class="modal-action modal-close waves-effect white-text pink waves-green btn-flat">Cancel</a>
+              <a href="#!" id="composeMail" class="modal-action modal-close waves-effect white-text teal waves-green btn-flat">Send</a>
+          </div>
+      </div>
+
+      <!-- Modal Structure -->
+      <div id="helpSupportModal" class="modal bottom-sheet">
+          <div class="modal-content">
+
+              <div class="row">
+                  <div class="col s12 l8 offset-l2">
+
+                      <h5 class="center">Help & Support</h5>
+
+                      <div class="card horizontal z-depth-1"
+                           style="margin-top:50px; margin-bottom:0px">
+                          <div class="card-image  valign-wrapper">
+                              <img class="valign" style="margin-left:15px"
+                                   src="data:image/jpeg;base64,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">
+                          </div>
+                          <div class="card-stacked">
+                              <div class="card-content left">
+                                  <h5>Hitesh Sahu</h5>
+
+
+                                  <blockquote>
+                                      Mobile,Web and Windows Developer
+                                  </blockquote>
+
+
+                                  <b>
+                                      <p>
+                                          <i class="material-icons left">email</i><strong>Support:</strong><a
+                                              href="mailto:hitesh.sahu@emerson.com">
+                                          hitesh.sahu@emerson.com</a></p>
+                                      <p>
+                                          <i class="material-icons left">call</i><strong>Contact:</strong><a
+                                              href="tel:8888813275"> +91 88888
+                                          13275 &emsp; &emsp;&emsp;&emsp;&emsp; </a></p>
+                                  </b>
+                              </div>
+                              <div class="card-action">
+                                  <a href="https://in.linkedin.com/in/hitesh-sahu-99639040">
+                                      Linkedin</a>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+          </div>
+          <div class="modal-footer">
+              <a href="#!"
+                 class=" modal-action modal-close waves-effect waves-green btn waves-effect waves-light center">Dismiss</a>
+          </div>
+      </div>
+  </div>
+
+</body>
+</html>
+
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!--Initalize MaterializeCSS-->
+<script src="./scripts/init.js"></script>
+</body>
+
+
+ <script>
+         //Global Variables
+         var imagePath = 'https://i6.fuskator.com/large/l4bDokX55UX/image-2.jpg';
+
+        angular.module('Vistor Managment',[]).controller('CategoryCtrl', function($scope) {
+
+          //Variables
+          $scope.productQuantity = 0;
+          $scope.messages = [{
+              face : imagePath,
+              what: 'Food & Beverages',
+              who: 'Min Li Chan',
+              when: '3:08PM',
+              notes: " I'll be in your neighborhood doing errands"
+            }, {
+              face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Tori_Black_AVN_2010.jpg/200px-Tori_Black_AVN_2010.jpg',
+              what: 'Brunch this weekend?',
+              who: 'Min Li Chan',
+              when: '3:08PM',
+              notes: " I'll be in your neighborhood doing errands"
+            }, {
+              face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tori_Black_at_FAME_Awards_2010.jpg/200px-Tori_Black_at_FAME_Awards_2010.jpg',
+              what: 'Brunch this weekend?',
+              who: 'Min Li Chan',
+              when: '3:08PM',
+              notes: " I'll be in your neighborhood doing errands"
+            }, {
+              face : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Tori_Black_2014.jpg/220px-Tori_Black_2014.jpg',
+              what: 'Brunch this weekend?',
+              who: 'Min Li Chan',
+              when: '3:08PM',
+              notes: " I'll be in your neighborhood doing errands"
+            }];
+
+           //Functions
+         $scope.increaseQuantity = function() {
+              $scope.productQuantity = $scope.productQuantity+1;
+            };
+          $scope.decreaseQuantity = function() {
+               $scope.productQuantity!=0 ? $scope.productQuantity = $scope.productQuantity-1: $scope.productQuantity = 0;
+            };
+        });
+
+
+        var txtStrCustName = $("#txtStrCustName");
+        var txtStrCustDesignation = $("#txtStrCustDesignation");
+        var txtStrCustEmail = $("#txtStrCustEmail");
+        var txtStrCustOrganization = $("#txtStrCustOrganization");
+        var txtStrCustDepartment = $("#txtStrCustDepartment");
+        var txtStrCustContactNo = $("#txtStrCustContactNo");
+        var txtStrCustMobile = $("#txtStrCustMobile");
+        var txtStrClusterName = $("#txtStrClusterName");
+        var txtStrProductName = $("#txtStrProductName");
+        var txtStrInstalledVersion = $("#txtStrInstalledVersion");
+        var txtStrRequirements = $("#txtStrRequirements");
+        var txtStrChallenges = $("#txtStrChallenges");
+        var txtStrFutureExpansion = $("#txtStrFutureExpansion");
+        var txtStrComments = $("#txtStrComments");
+        var txtSalesEnggName = $("#txtSalesEnggName");
+        var txtCountryName = $("#strCountryNameOption");
+        var txtRMTRequirements = $("#txtStrRMTRequirements");
+        var txtANARequirements = $("#txtStrANARequirements");
+        var txtMMIRequirements = $("#txtStrMMIRequirements");
+        var txtRFDRequirements = $("#txtStrRFDRequirements");
+        var txtPSSRequirements = $("#txtStrPSSRequirements");
+        var txtPWSRequirements = $("#txtStrPWSRequirements");
+        var txtREGSRequirements = $("#txtStrREGSRequirements");
+        var txtFISHERRequirements = $("#txtStrFISHERRequirements");
+        var txtVIRGORequirements = $("#txtStrVIRGORequirements");
+        var txtRASRequirements = $("#txtStrRASRequirements");
+        var txtDANIELRequirements = $("#txtStrDANIELRequirements");
+        var txtROXARRequirements = $("#txtStrROXARRequirements");
+        var txtBETTISRequirements = $("#txtStrBETTISRequirements");
+
+   $('#composeMail').click(function () {
+      var link = "mailto:"+txtStrCustEmail.val()
+           + "?subject="+ encodeURIComponent("Thank you for your feedback")
+           + "&body=" + encodeURIComponent("  It has been a pleasure serving you. Emerson takes pride in giving priority to their customers and looking after their needs.\nQuality and customer service are what distinguish us from others. We always strive to exceed our customers\ expectations and meet their requirements.\n If there is anything else we can do for you, please do inform us. We appreciate your feedback; it’s what keeps us improving.\n\n Thank you again for choosing us. Looking forward to having you as one of our valued customers for many years to come.");
+   window.location.href = link;
+    // $(location).attr('href', 'mailto:'+txtStrCustEmail.val()+"?subject=Thank you for your feedback&body=It has been a pleasure serving you. Emerson takes pride in giving priority to their customers and looking after their needs. \n\n Quality and customer service are what distinguish us from others. We always strive to exceed our customers’ expectations and meet their requirements.\n \n If there is anything else we can do for you, please do inform us. We appreciate your feedback; it’s what keeps us improving.\n\n Thank you again for choosing us. Looking forward to having you as one of our valued customers for many years to come.");
+   });
+
+        $('#btnCFB').click(function () {
+            var InputFeedback = new Object();
+            document.getElementById('progress_bar').style.display = "block";
+            Materialize.toast('Uploading Your Feedback, Please wait.', 2000);
+            var requrments = " ";
+
+            InputFeedback.StrCustName = txtStrCustName.val();
+            InputFeedback.StrCustDesignation = txtStrCustDesignation.val();
+            InputFeedback.StrCustEmail = txtStrCustEmail.val();
+            InputFeedback.StrCustOrganization = txtStrCustOrganization.val();
+            InputFeedback.StrCustDepartment = txtStrCustDepartment.val();
+            InputFeedback.StrCustContactNo = txtStrCustContactNo.val();
+            InputFeedback.StrCustMobile = txtStrCustMobile.val();
+            InputFeedback.StrClusterName = txtStrClusterName.val();
+            InputFeedback.StrProductName = txtStrProductName.val().toString('');
+            InputFeedback.StrInstalledVersion = txtStrInstalledVersion.val().toString('');
+            InputFeedback.StrRequirements = requrments;
+            InputFeedback.StrChallenges = txtStrChallenges.val();
+            InputFeedback.StrFutureExpansion = txtStrFutureExpansion.val();
+            InputFeedback.StrComments = txtStrComments.val();
+            InputFeedback.strCountryName = txtCountryName.val();
+            InputFeedback.strSalesEnggName = txtSalesEnggName.val();
+            //alert(JSON.stringify(InputFeedback, null, 4));
+            $.ajax({
+                //url: "https://ACMobileApps.EmersonClimate.com/EWS/api/PostCustFeedback",
+                url: "http://localhost:53749/api/PostCustFeedback",
+                type: 'POST',
+                data: InputFeedback,
+                dataType: 'json',
+                success: function (PostCustFeedbackBE) {
+                    document.getElementById('progress_bar').style.display = "none";
+                    var strDiv = '<table id="tblCFB"></table>';
+                    var strTable = '<tr><th>Result</th><th>Value</th></tr>';
+                    strTable = strTable + '<tr><td>Status</td><td>' + PostCustFeedbackBE.InsertStatus + '</td><tr>';
+                    $('#divCFB').html(strDiv);
+                    $('#tblCFB').html(strTable);
+                    Materialize.toast('Feedback Submitted, Thank You.', 2000);
+                     $('#sendNotificationModal').modal('open');
+                },
+                error: function (e) {
+                    //  alert(JSON.stringify(e.stack));
+                    document.getElementById('progress_bar').style.display = "none";
+                    //  Console.log(e.);
+                      $('#sendNotificationModal').modal('open');
+                    // Materialize.toast(message, displayLength, className, completeCallback);
+                    Materialize.toast('Error! ' + JSON.stringify(e.stack), 4000) // 4000 is the duration of the toast
+                }
+            });
+        });
+
+
+
+      //-------------------------CAMERA CONTROL
+
+       // Elements for taking the snapshot
+       var canvas = document.getElementById('canvas');
+       var context = canvas.getContext('2d');
+       var video = document.getElementById('video');
+
+
+       // Trigger photo take
+       document.getElementById("snap").addEventListener("click", function() {
+
+      	context.drawImage(video, 0, 0, 640, 480);
+       });
+
+
+       function startCamera()
+       {
+                // Get access to the camera!
+                if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    // Not adding `{ audio: true }` since we only want video now
+                    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                        video.src = window.URL.createObjectURL(stream);
+                        video.play();
+                    });
+                }
+                else if(navigator.getUserMedia) { // Standard
+                    navigator.getUserMedia({ video: true }, function(stream) {
+                        video.src = stream;
+                        video.play();
+                    }, errBack);
+                } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+                    navigator.webkitGetUserMedia({ video: true }, function(stream){
+                        video.src = window.webkitURL.createObjectURL(stream);
+                        video.play();
+                    }, errBack);
+                } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+                    navigator.mozGetUserMedia({ video: true }, function(stream){
+                        video.src = window.URL.createObjectURL(stream);
+                        video.play();
+                    }, errBack);
+                }
+       }
+
+
+                 // Initialize Firebase
+                 var config = {
+                   apiKey: "AIzaSyAnp5M7JKSQVsmRQF1A_luz43U2DFStQ6I",
+                   authDomain: "ecart-1d0ca.firebaseapp.com",
+                   databaseURL: "https://ecart-1d0ca.firebaseio.com",
+                   projectId: "ecart-1d0ca",
+                   storageBucket: "ecart-1d0ca.appspot.com",
+                   messagingSenderId: "404598332603"
+                 };
+                 firebase.initializeApp(config);
+                 var user = firebase.auth().currentUser;
+
+                 //Handle profile Pic selection
+                 function handleFileSelect(evt) {
+                                var files = evt.target.files; // FileList object
+                                // Loop through the FileList and render image files as thumbnails.
+                                for (var i = 0, f; f = files[i]; i++) {
+                                  // Only process image files.
+                                  if (!f.type.match('image.*')) {
+                                    continue;
+                                  }
+                                  var reader = new FileReader();
+                                  // Closure to capture the file information.
+                                  reader.onload = (function(theFile) {
+                                    return function(e) {
+                                      // Render thumbnail.
+                                     /* var span = document.createElement('span');
+                                      span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                                        '" title="', escape(theFile.name), '"/>'].join('');
+                                      document.getElementById('list').insertBefore(span, null); */
+                                      $("#profile_pic").attr("src",  e.target.result);
+                                        // Check browser support
+                                        if (typeof(Storage) !== "undefined") {
+                                          user = firebase.auth().currentUser;
+                                           if (user != null) {
+                                             Materialize.toast('Profile Pic updated' , 2000, 'rounded');
+                                            // Store
+                                            localStorage.setItem(user.uid, e.target.result);
+                                             }
+                                        } else {
+                                            Materialize.toast('Unable to set image, your web browser is not supported' , 2000, 'rounded');
+                                        }
+                                    };
+                  })(f);
+                          // Read in the image file as a data URL.
+                           reader.readAsDataURL(f);
+                   }
+                 }
+
+
+                 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                 //get current signed in user credentials
+                 function getUser(){
+                      var user = firebase.auth().currentUser;
+                      if (user != null) {
+                           $("#id_user_name").val(user.displayName);
+                           $("#user_name").text(user.displayName);
+                           $("#user_mail").text(user.email);
+                          // Retrieve image path from web storage
+                          $("#profile_pic").attr("src",  localStorage.getItem(user.uid));
+                      }
+                     }
+
+                 //update user profile
+                 function updateUser()
+                 {
+                  var user = firebase.auth().currentUser;
+                  user.updateProfile({
+                    displayName:document.getElementById("id_user_name").value
+                   //  photoURL: "https://example.com/jane-q-user/profile.jpg"
+                  }).then(function() {
+                    // Update successful.
+                      Materialize.toast('Profile updated' , 2000, 'rounded');
+                  }, function(error) {
+                    // An error happened.
+                       var errorCode = error.code;
+                       var errorMessage = error.message;
+                       Materialize.toast('Update Profile Failed:'+ errorMessage, 4000, 'rounded');
+                  });
+
+                 }
+
+                //Sign Up new User
+                function signOut()
+                      {
+                        firebase.auth().signOut().then(function() {
+                           // Sign-out successful.
+                           // Redirecting to other page.
+                            Materialize.toast('Signing Off:', 2000, 'rounded');
+                            window.location = "index.html";
+                             }).catch(function(error) {
+                            // An error happened.
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                          Materialize.toast('Sign Up Failed:'+ errorMessage, 4000, 'rounded');
+                        });
+                      };
+</script>
+
+
+
+
+</body>
+</html>

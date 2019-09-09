@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Vistor Managment|About</title>
+  <meta name="author" content="Hitesh Sahu"/>
+
+  <!--Fuck Internet Explorer-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <!--PWA MAnifest-->
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Chrome, Firefox OS and Opera theme color-->
+  <meta name="theme-color" content="#0d47a1">
+
+  <!--Change the status bar appearance in iOS devices-->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+  "/>
+  <!-- icon in the highest resolution, Chrome and Opera uses icon.png, which is scaled to the necessary size by the device. -->
+  <link rel="icon" sizes="192x192" href="./assets/img/icon.png">
+  <!-- reuse same icon for Safari and add more supported size for other iOS devices-->
+  <link rel="apple-touch-icon" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/icon.png">
+  <!-- multiple icons for IE -->
+  <meta name="msapplication-square70x70logo" content="./assets/img/icon.png">
+  <meta name="msapplication-square150x150logo" content="./assets/img/icon.png">
+  <meta name="msapplication-wide310x150logo" content="./assets/img/icon.png">
+  <!-- apple-->
+  <link rel="apple-touch-startup-image" href="./assets/img/icon.png">
+
+    <!---------------------------CSS ------------------------------->
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+     <!--Let browser know website is optimized for mobile-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Font Awesome-->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            type="text/css" rel="stylesheet" media="screen,projection"/>
+      <!--Custom SetUp-->
+      <link rel="stylesheet" href="./styles/style.css">
+
+    <!---------------------------FIREBASE------------------------------->
+    <script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+
+    <!--------------------------Data Tables------------------------------->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+</head>
+    <body class="white">
+    <div class="navbar-fixed" id= "AppBar">
+      <nav role="navigation">
+          <div class="nav-wrapper">
+              <a id="logo-container" href="#" class="brand-logo yellow_fire ">Report</a>
+              <ul class="right hide-on-med-and-down">
+                  <li><a href="home.html" class="white-text">Visitors<i
+                          class="material-icons left white-text">assignment</i></a>
+                  </li>
+
+                  <li><a href="form.html" class="white-text">Assignment<i
+                          class="material-icons left white-text">assignment_ind</i></a>
+                  </li>
+
+                  <li><a href="#" class="white-text">Reports<i
+                        class="material-icons left white-text">timeline</i></a>
+                  </li>
+
+                  <li><a href="about.html" class="white-text"><i
+                          class="material-icons left white-text">info_outline</i>Help & Support</a>
+                  </li>
+                  <li><a href="#" onclick="signOut()" class="white-text">Log Out<i
+                          class="material-icons text-info left white-text">lock_open</i></a>
+                  </li>
+              </ul>
+
+              <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i
+                      class="material-icons">menu</i></a>
+          </div>
+      </nav>
+    </div>
+
+  <!--Loading Indicator-->
+  <div class="progress" id= "progress">
+     <div class="indeterminate"></div>
+  </div>
+
+    <!--Mobile Only Menu-->
+      <ul id="nav-mobile" class="side-nav">
+          <li ><div class="userView">
+              <div class="background">
+                  <img src="./assets/img/header/head_drawer.png">
+              </div>
+              <a href="#updateProfileModal"  class="modal-trigger"><img  id ="profile_pic" class="circle " src="./assets/img/PlaceHolder/user_place_holder.png"></a>
+              <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_name" class="white-text name  ">User name</span></a>
+              <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_mail" class="white-text email  ">Email ID</span></a>
+          </div></li>
+          <li><a href="home.html" class="blue-text">Visitors<i
+                  class="material-icons left blue-text">assignment</i></a>
+          </li>
+          <li><a href="form.html" class="blue-text">Assignment<i
+                  class="material-icons left blue-text">assignment_ind</i></a>
+          </li>
+
+          <li><a href="#" class="blue-text">Reports<i
+                  class="material-icons left blue-text">timeline</i></a>
+          </li>
+
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Communicate</a></li>
+
+          <li><a href="about.html" class="blue-text"><i
+                  class="material-icons left blue-text">info_outline</i>Help & Support</a>
+          </li>
+          <li><a href="#" onclick="signOut()" class="blue-text">Log Out<i
+                  class="material-icons text-info left blue-text">lock_open</i></a>
+          </li>
+      </ul>
+</div>
+
+  <!--REPORT-->
+  <div class="section">
+
+            <div id="test2" class="col s12">
+
+                <div class="card-panel z-depth-2 hoverable">
+
+                    <h5 class="center grey-text">Get All Visitors</h5>
+                    <br/>
+
+                    <div class="center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action"
+                                id="btnGet">
+                            View Report
+                            <i class="material-icons right">system_update_alt</i>
+                        </button>
+                    </div>
+
+                    <br/>
+                    <div class="input-field ">
+                        <i class="material-icons prefix">search</i>
+                        <input id="myInput" onkeyup='searchTable()' type='text'
+                               placeholder="Type to Filter">
+                        <label for="txtStrClusterName">Search Fedback</label>
+                    </div>
+
+                    <div id="divCFB_D" class="row"/>
+
+                </div>
+            </div>
+
+            </div>
+
+            <p/>
+         </div>
+
+   </div>
+<!--Footer-->
+<footer class="page-footer">
+    <div class="container white-text">
+        <h5 class="white-text">Vistor Managment</h5>
+        <p>Visitor Mangment App build with HTML5, AngularJS, Spring Hibernate. </p>
+    </div>
+
+    <div class="container">
+              <div class="row">
+                   <div class="col s1">
+                     <a href = https://github.com/hiteshsahu
+                     class ="tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="GitHub" target="_blank">
+                     <i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= https://www.linkedin.com/in/hitesh-sahu-99639040
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="Linkedin" target="_blank">
+                    <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=http://stackoverflow.com/users/2252113/hitesh-sahu
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="StackOverflow"  target="_blank" >
+                    <i class="fa fa-stack-overflow fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://codepen.io/hiteshsahu/
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Codepen"
+                      target="_blank" >
+                      <i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://twitter.com/HiteshSahu_" class="tooltipped white-text"
+                     data-position="bottom" data-delay="50" data-tooltip="Twitter"
+                    target="_blank">
+                    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://www.facebook.com/HitsDroid
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50" data-tooltip="Facebook"
+                     target="_blank">
+                     <i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://plus.google.com/u/0/+HiteshSahu7
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="Google plus"  target="_blank">
+                    <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
+                  </div>
+
+             </div>
+             </div>
+       <div class="footer-copyright  darken-4 ">
+           <div class="container">
+                    ©2017 <a class="brown-text text-lighten-3" href="http://hiteshsahu.com:">Hitesh Sahu All
+                    rights reserved.</a> |  <a href="#">Help</a> | <a href="#">Privacy & Terms</a>
+           </div>
+       </div>
+</footer>
+
+<!-- Modal Structure -->
+<div id="updateProfileModal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div class="card-reveal">
+            <div class="row center-align">
+                <span class="card-title grey-text text-darken-4">Reset Password<i
+                        class="material-icons right modal-action modal-close">close</i></span>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix center">account_circle</i>
+                    <input id="id_user_name" type="text" class="validate left-align"
+                           required="required" placeholder="User Name"/>
+                    <label for="id_user_name" class="left-align">Please enter user name</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="fa fa-picture-o prefix center" aria-hidden="true"></i>
+                    <input type="file" id="files" name="files[]" multiple class = "left-align"
+                    />
+                </div>
+                <div class=" col s12">
+                    <output id="list"></output>
+                </div>
+            </div>
+        </div>
+      </div>
+
+        <div class="modal-footer center-align">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn green"
+               style="margin-left:10px">CANCEL</a>
+            <input type="button" class="waves-effect modal-action modal-close waves-light btn pink" value="SAVE"
+                   id="resetPassword" onclick="updateUser()" />
+        </div>
+
+
+    <!--  Scripts-->
+
+  <!--Data Table-->
+  <script type="text/javascript"
+          src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript"
+          src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+
+  <!--Export table js-->
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+  <script type="text/javascript"
+          src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"></script>
+  <script type="text/javascript"
+          src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
+  <script type="text/javascript"
+          src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+  <script type="text/javascript"
+          src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+          <style type="text/css">
+              table {
+                  table-layout: fixed;
+                  word-wrap: break-word;
+              }
+                  table th, table td {
+                      overflow: hidden;
+                  }
+              .tabs .indicator {
+                  background-color: teal;
+              }
+          </style>
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--Initalize MaterializeCSS-->
+    <script src="./scripts/init.js"></script>
+    <script type="text/javascript">
+
+        //Other
+        var name, email, photoUrl, uid, emailVerified;
+      // Initialize Firebase
+       var config = {
+        apiKey: "AIzaSyAnp5M7JKSQVsmRQF1A_luz43U2DFStQ6I",
+        authDomain: "ecart-1d0ca.firebaseapp.com",
+        databaseURL: "https://ecart-1d0ca.firebaseio.com",
+        projectId: "ecart-1d0ca",
+        storageBucket: "ecart-1d0ca.appspot.com",
+        messagingSenderId: "404598332603"
+      };
+      firebase.initializeApp(config);
+      var user = firebase.auth().currentUser;
+
+      //Sign Up new User
+      function signOut()
+      {
+        firebase.auth().signOut().then(function() {
+           // Sign-out successful.
+           // Redirecting to other page.
+            Materialize.toast('Signing Off:', 2000, 'rounded');
+            window.location = "index.html";
+             }).catch(function(error) {
+            // An error happened.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          Materialize.toast('Sign Up Failed:'+ errorMessage, 4000, 'rounded');
+        });
+      };
+
+        //Handle profile Pic selection
+        function handleFileSelect(evt) {
+                          var files = evt.target.files; // FileList object
+                          // Loop through the FileList and render image files as thumbnails.
+                          for (var i = 0, f; f = files[i]; i++) {
+                            // Only process image files.
+                            if (!f.type.match('image.*')) {
+                              continue;
+                            }
+                            var reader = new FileReader();
+                            // Closure to capture the file information.
+                            reader.onload = (function(theFile) {
+                              return function(e) {
+                                // Render thumbnail.
+                               /* var span = document.createElement('span');
+                                span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                                  '" title="', escape(theFile.name), '"/>'].join('');
+                                document.getElementById('list').insertBefore(span, null); */
+                                $("#profile_pic").attr("src",  e.target.result);
+                                  // Check browser support
+                                  if (typeof(Storage) !== "undefined") {
+                                    user = firebase.auth().currentUser;
+                                     if (user != null) {
+                                       Materialize.toast('Profile Pic updated' , 2000, 'rounded');
+                                      // Store
+                                      localStorage.setItem(user.uid, e.target.result);
+                                       }
+                                  } else {
+                                      Materialize.toast('Unable to set image, your web browser is not supported' , 2000, 'rounded');
+                                  }
+                              };
+            })(f);
+                    // Read in the image file as a data URL.
+                     reader.readAsDataURL(f);
+          }
+  }
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  //get current signed in user credentials
+  function getUser()
+                          {
+                                var user = firebase.auth().currentUser;
+                                if (user != null) {
+                                     $("#id_user_name").val(user.displayName);
+                                     $("#user_name").text(user.displayName);
+                                     $("#user_mail").text(user.email);
+                                    // Retrieve image path from web storage
+                                    $("#profile_pic").attr("src",  localStorage.getItem(user.uid));
+                                }
+      }
+//update user profile
+function updateUser()
+      {
+            var user = firebase.auth().currentUser;
+            user.updateProfile({
+              displayName:document.getElementById("id_user_name").value
+             //  photoURL: "https://example.com/jane-q-user/profile.jpg"
+            }).then(function() {
+              // Update successful.
+                Materialize.toast('Profile updated' , 2000, 'rounded');
+            }, function(error) {
+              // An error happened.
+                 var errorCode = error.code;
+                 var errorMessage = error.message;
+                 Materialize.toast('Update Profile Failed:'+ errorMessage, 4000, 'rounded');
+            });
+
+     }
+
+     function searchTable() {
+         var input, filter, found, table, tr, td, i, j;
+         input = document.getElementById("myInput");
+         filter = input.value.toUpperCase();
+         table = document.getElementById("tbl");
+         tr = table.getElementsByTagName("tr");
+         for (i = 0; i < tr.length; i++) {
+             td = tr[i].getElementsByTagName("td");
+             for (j = 0; j < td.length; j++) {
+                 if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                     found = true;
+                 }
+             }
+             if (found) {
+                 tr[i].style.display = "";
+                 found = false;
+             } else {
+                 // tr[i].style.display = "none";
+                 if (tr[i].id != 'tableHeader') { tr[i].style.display = "none"; }
+             }
+         }
+     }
+
+     var Feedback = new Object();
+     $('#btnGet').click(function () {
+         Feedback.StrTest = "";
+         document.getElementById('progress_bar').style.display = "block";
+         Materialize.toast('Fetching all Feedbacks, Please wait.', 2000)
+         $.ajax({
+             // url: "https://ACMobileApps.EmersonClimate.com/EWS/api/GetCustomerFeedback",
+             url: "http://localhost:53749/api/GetCustomerFeedback",
+             data: Feedback,
+             type: 'POST',
+             dataType: 'json',
+             success: function (data) {
+                 document.getElementById('progress_bar').style.display = "none";
+                 var strDiv = '<table id="tbl" class="striped responsive-table">';
+                 var strTable = ' <thead><tr id="tableHeader"><th>Customer Name</th><th>Customer Designation</th><th>Customer Email</th><th>Customer Organization</th><th>Customer Department</th><th>Customer ContactNo</th><th>Customer Mobile</th><th>Cluster Name</th><th>Product Name</th><th> Installed Version</th><th>Requirements</th><th>Challenges</th><th>Future Expansion</th><th>Comments</th><th>CountryName</th><th>Sales Engg. Name</th></tr> </thead> <tbody>';
+                 $.each(data, function (key, GetCustomerFeedbackBE) {
+                     //strTable = strTable + '<tr><td>' + GetCustomerFeedbackBE.StrCustName + '</td><td>' + GetCustomerFeedbackBE.StrCustDesignation + '</td><td>' + GetCustomerFeedbackBE.StrCustEmail + '</td><td>' + GetCustomerFeedbackBE.StrCustOrganization + '</td><td>' + GetCustomerFeedbackBE.StrCustDepartment + '</td><td>' + GetCustomerFeedbackBE.StrCustContactNo + '</td><td>' + GetCustomerFeedbackBE.StrCustMobile + '</td><td>' + GetCustomerFeedbackBE.StrClusterName + '</td><td>' + GetCustomerFeedbackBE.StrProductName + '</td><td>' + GetCustomerFeedbackBE.StrInstalledVersion + '</td><td>' + GetCustomerFeedbackBE.StrRequirements + '</td><td>' + GetCustomerFeedbackBE.StrChallenges + '</td><td>' + GetCustomerFeedbackBE.StrFutureExpansion + '</td><td>' + GetCustomerFeedbackBE.StrComments + '</td><td>' + GetCustomerFeedbackBE.StrCountryName + '</td><td>' + GetCustomerFeedbackBE.StrSalesEnggName + '</td></tr>'
+                     strTable = strTable + '<tr><td>' + GetCustomerFeedbackBE.StrCustName + '</td><td>' + GetCustomerFeedbackBE.StrCustDesignation + '</td><td>' + GetCustomerFeedbackBE.StrCustEmail + '</td><td>' + GetCustomerFeedbackBE.StrCustOrganization + '</td><td>' + GetCustomerFeedbackBE.StrCustDepartment + '</td><td>' + GetCustomerFeedbackBE.StrCustContactNo + '</td><td>' + GetCustomerFeedbackBE.StrCustMobile + '</td><td>' + GetCustomerFeedbackBE.StrClusterName + '</td><td>' + GetCustomerFeedbackBE.StrProductName + '</td><td>' + GetCustomerFeedbackBE.StrInstalledVersion + '</td><td>' + GetCustomerFeedbackBE.StrRequirements + '</td><td>' + GetCustomerFeedbackBE.StrChallenges + '</td><td>' + GetCustomerFeedbackBE.StrFutureExpansion + '</td><td>' + GetCustomerFeedbackBE.StrComments + '</td><td>' + GetCustomerFeedbackBE.StrCountryName + '</td><td>' + GetCustomerFeedbackBE.StrSalesEnggName + '</td></tr>';
+                 });
+                 strTable = strTable + '</tbody></table>';
+                 $('#divCFB_D').html(strDiv);
+                 $('#tbl').html(strTable);
+                 $('#tbl').DataTable({
+                     searching: false,
+                     paging: false,
+                     bInfo: false,
+                     bFilter: false,
+                     dom: 'Bfrtip',
+                     buttons: [
+                         'copy', 'csv', 'excel', 'pdf', 'print'
+                     ]
+                 });
+             },
+             error: function (e) {
+                 // Console.log(e);
+                 document.getElementById('progress_bar').style.display = "none";
+                 Materialize.toast('Error! ' + JSON.stringify(e.stack), 4000) // 4000 is the duration of the toast
+             }
+         });
+     });
+
+
+    </script>
+</body>

@@ -1,0 +1,63 @@
+.cards-container {
+  column-break-inside: avoid;
+}
+.cards-container .card {
+  display: inline-block;
+  overflow: visible;
+}
+
+@media only screen and (max-width: 600px) {
+  .cards-container {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .cards-container {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .cards-container {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+.text-center {
+  text-align: center;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  /*
+  * Theme wide Accent COlor
+  */
+  .yellow_fire{
+    color:#fbc02d;
+  }
+
+ /*
+ * Background overlay header
+ */
+  .texture-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/img/grid.png);
+}
+
+.modal {!important ; max-height: 80% !important } /* increase the width and height! */
