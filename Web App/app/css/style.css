@@ -1,0 +1,147 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+   background-color: antiquewhite;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+ .view{
+   top: 100px;
+   bottom:100%;
+   width: 100%;
+   transition: 300ms;
+ }
+
+.cards-container {
+  column-break-inside: avoid;
+}
+.cards-container .card {
+  display: inline-block;
+  overflow: visible;
+}
+
+@media only screen and (max-width: 600px) {
+  .cards-container {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .cards-container {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .cards-container {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+.text-center {
+  text-align: center;
+}
+
+  /*
+  * Theme wide Accent COlor
+  */
+  .yellow_fire{
+    color:#fbc02d;
+  }
+
+ /*
+ * Background overlay header
+ */
+  .texture-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/img/grid.png);
+}
+
+  table {
+      table-layout: fixed;
+      word-wrap: break-word;
+  }
+
+  table th, table td {
+      overflow: hidden;
+  }
+
+.modal {!important ; max-height: 80% !important } /* increase the width and height! */
+
+/*Transition Animation */
+
+
+/* First animation*/
+.first .view.ng-enter{
+  left: -100%;
+}
+
+.first .view.ng-enter.ng-enter-active{
+  left: 0%;
+}
+
+.first .view.ng-leave{
+  left: 0%;
+}
+
+.first .view.ng-leave.ng-leave-active{
+  left: 100%;
+}
+
+/* Second animation*/
+.second .view.ng-enter{
+  left: 100%;
+}
+
+.second .view.ng-enter.ng-enter-active{
+  left: 0%;
+}
+
+.second .view.ng-leave{
+  left: 0%;
+}
+
+.second .view.ng-leave.ng-leave-active{
+  left: -100%;
+}
+
+/* Third animation*/
+.third .view.ng-enter{
+  top: 100%;
+}
+
+.third .view.ng-enter.ng-enter-active{
+  top: 0%;
+}
+
+.third .view.ng-leave{
+  top: 0%;
+}
+
+.third .view.ng-leave.ng-leave-active{
+  top: -100%;
+}
+
+/* Third animation*/
+.welcome .view.ng-enter{
+  opacity: 0;
+}
+
+.box.n{
+  text-transform: none;
+}
+
+/*html {
+  overflow-y: hidden;
+}*/

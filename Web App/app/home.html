@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <!--Fuck Internet Explorer-->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Vistor Managment</title>
+   <meta name="author" content="Hitesh Sahu"/>
+
+   <!--PWA MAnifest-->
+   <link rel="manifest" href="./manifest.json" />
+
+   <!-- Chrome, Firefox OS and Opera theme color-->
+   <meta name="theme-color" content="#37474f">
+
+   <!--Change the status bar appearance in iOS devices-->
+   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+   <meta name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+   <!-- icon in the highest resolution, Chrome and Opera uses icon.png, which is scaled to the necessary size by the device. -->
+   <link rel="icon" sizes="192x192" href="./assets/img/icon.png">
+   <!-- reuse same icon for Safari and add more supported size for other iOS devices-->
+   <link rel="apple-touch-icon" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/icon.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/icon.png">
+   <!-- multiple icons for IE -->
+   <meta name="msapplication-square70x70logo" content="./assets/img/icon.png">
+   <meta name="msapplication-square150x150logo" content="./assets/img/icon.png">
+   <meta name="msapplication-wide310x150logo" content="./assets/img/icon.png">
+   <!-- apple-->
+   <link rel="apple-touch-startup-image" href="./assets/img/icon.png">
+  <!--------------------------- CSS ------------------------------->
+
+   <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css"  type="text/css" rel="stylesheet" media="screen,projection">
+    <link rel="stylesheet" href="./css/materialize.min.css"  type="text/css" rel="stylesheet" media="screen,projection">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!---------------------------FIREBASE------------------------------->
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+ </head>
+
+<body  ng-app="VMS" ng-controller="CategoryCtrl" ng-class="animation" >
+
+<!--HEADER Starts-->
+<header class="top-nav">
+  <div class="navbar-fixed">
+   <nav role="navigation nav-extended">
+      <div class="nav-wrapper">
+          <a id="logo-container" href="#" class="brand-logo yellow_fire ">VMS</a>
+          <ul class="right hide-on-med-and-down">
+              <li><a href="#!visitors" class="white-text">Visitors<i
+                      class="material-icons left white-text">assignment</i></a>
+              </li>
+
+              <li><a href="#!form" class="white-text">Assignment<i
+                      class="material-icons left white-text">assignment_ind</i></a>
+              </li>
+
+              <li><a href="#!report" class="white-text">Report<i
+                    class="material-icons left white-text">timeline</i></a>
+              </li>
+
+              <li><a href="#!about" class="white-text"><i
+                      class="material-icons left white-text">info_outline</i>Help & Support</a>
+              </li>
+              <li><a href="#" onclick="signOut()" class="white-text">Log Out<i
+                      class="material-icons text-info left white-text">lock_open</i></a>
+              </li>
+          </ul>
+
+          <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i
+                  class="material-icons">menu</i></a>
+      </div>
+      <div class="nav-content">
+          <a class="btn-floating btn-large yellow darken-2 halfway-fab waves-effect waves-light">
+            <i class="large material-icons">search</i>
+          </a>
+    </div>
+  </nav>
+ </div>
+     <!--Loading Indicator-->
+    <div class="progress"  id= "progress">
+        <div class="indeterminate"></div>
+    </div>
+    <!--Mobile only menu-->
+
+    <ul id="nav-mobile" class="side-nav">
+        <li ><div class="userView">
+            <div class="background">
+                <img src="./assets/img/header/head_drawer.png">
+            </div>
+            <a href="#updateProfileModal"  class="modal-trigger"><img  id ="profile_pic" class="circle " src="./assets/img/PlaceHolder/user_place_holder.png"></a>
+            <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_name" class="white-text name  ">User name</span></a>
+            <a href="#updateProfileModal"  class="modal-trigger"><span id ="user_mail" class="white-text email  ">Email ID</span></a>
+        </div></li>
+        <li><a href="#/visitors" class="blue-text">Visitors<i
+                class="material-icons left blue-text">assignment</i></a>
+        </li>
+        <li><a href="#!form" class="blue-text">Assignment<i
+                class="material-icons left blue-text">assignment_ind</i></a>
+        </li>
+
+        <li><a href="#!report" class="blue-text">Reports<i
+                class="material-icons left blue-text">timeline</i></a>
+        </li>
+
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Communicate</a></li>
+
+        <li><a href="#!about" class="blue-text"><i
+                class="material-icons left blue-text">info_outline</i>Help & Support</a>
+        </li>
+        <li><a href="#" onclick="signOut()" class="blue-text">Log Out<i
+                class="material-icons text-info left blue-text">lock_open</i></a>
+        </li>
+
+    </ul>
+  </header>
+
+
+<!--HEADER Ends-->
+
+<main>
+    <div ng-view class = 'view'>
+    </div>
+</main>
+
+
+<!--Footer-->
+<div class="page-footer">
+    <div class="container white-text">
+        <h5 class="white-text">Vistor Managment System (VMS)</h5>
+        <p>Visitor Mangment App build with HTML5, AngularJS, Spring Hibernate. </p>
+    </div>
+
+    <div class="container">
+              <div class="row">
+
+                   <div class="col s1">
+                     <a href = https://github.com/hiteshsahu
+                     class ="tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="GitHub" target="_blank">
+                     <i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= https://www.linkedin.com/in/hitesh-sahu-99639040
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="Linkedin" target="_blank">
+                    <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=http://stackoverflow.com/users/2252113/hitesh-sahu
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="StackOverflow"  target="_blank" >
+                    <i class="fa fa-stack-overflow fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://codepen.io/hiteshsahu/
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Codepen"
+                      target="_blank" >
+                      <i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= "https://twitter.com/HiteshSahu_"
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Twitter"
+                      target="_blank">
+                    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://www.facebook.com/HitsDroid
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50" data-tooltip="Facebook"
+                     target="_blank">
+                     <i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://plus.google.com/u/0/+HiteshSahu7
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="Google plus"  target="_blank">
+                    <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
+                  </div>
+             </div>
+          </div>
+       <div class="footer-copyright darken-4 ">
+           <div class="container">
+                    ©2017 <a class="brown-text text-lighten-3" href="http://hiteshsahu.com:">Hitesh Sahu All
+                    rights reserved.</a> |  <a href="#">Help</a> | <a href="#">Privacy & Terms</a>
+           </div>
+       </div>
+</div>
+
+
+  <!-- Modal Structure -->
+ <div id="updateProfileModal" class="modal bottom-sheet">
+     <div class="modal-content">
+         <div class="card-reveal">
+             <div class="row center-align">
+             <span class="card-title grey-text text-darken-4">Reset Password<i
+                     class="material-icons right modal-action modal-close">close</i></span>
+                 <div class="input-field col s12">
+                     <i class="material-icons prefix center">account_circle</i>
+                     <input id="id_user_name" type="text" class="validate left-align"
+                            required="required" PlaceHolder="User Name"/>
+                     <label for="id_user_name" class="left-align">Please enter user name</label>
+                 </div>
+                 <div class="input-field col s12">
+                     <i class="fa fa-picture-o prefix center" aria-hidden="true"></i>
+                     <input type="file" id="files" name="files[]" multiple class = "left-align"
+                          />
+                </div>
+                 <div class=" col s12">
+                 <output id="list"></output>
+                 </div>
+         </div>
+     </div>
+     <div class="modal-footer center-align">
+         <a href="#!" class="modal-action modal-close waves-effect waves-green btn green"
+            style="margin-left:10px">CANCEL</a>
+         <input type="button" class="modal-action modal-close waves-effect waves-light btn blue" value="SAVE"
+                id="resetPassword" onclick="updateUser()" />
+     </div>
+  </div>
+  </div>
+
+
+  <!-- Take Pic Modal Structure -->
+  <div id="takePicModal" class="modal bottom-sheet">
+      <div class="modal-content">
+          <h4>Take a Picture</h4>
+          <p>Please turn On Your Web Camera and ask Visitor Stand In front of It</p>
+
+          <button  onclick="startCamera()" data-position="bottom" data-delay="50" data-tooltip="Start Camera"
+          class="waves-effect waves-light orange tooltipped btn-large">Click to Start Camera<i class="material-icons right">photo_camera</i></button>
+
+          <div class="row">
+
+               <div class="col s12">
+                     <div class="card">
+                       <div class="card-image center grey">
+                         <video id="video" width="640" height="480"  autoplay class='grey'></video>
+                         <a  id="snap"  data-position="bottom" data-delay="50" data-tooltip="Take Pic"
+                         class="btn-floating halfway-fab waves-effect waves-light red tooltipped btn-large"><i class="material-icons">camera</i></a>
+                         <span class="card-title">Live Preview</span>
+                       </div>
+                       <div class="card-content">
+                         <p>Start Camera and Click on Take Pic.</p>
+                       </div>
+                     </div>
+                   </div>
+
+
+
+               <div class= "col s12 ">
+                 <div class="card">
+                   <div class="card-image center grey">
+                     <canvas id="canvas" width="640" height="480" ></canvas>
+                   </div>
+                 </div>
+               </div>
+
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+          <a href="#!"
+             class=" modal-action modal-close waves-effect waves-green btn waves-effect waves-light center"><i
+                  class="material-icons left">done</i>DONE</a>
+      </div>
+  </div>
+
+  <!-- Send Notn Structure -->
+  <div id="sendNotificationModal" class="modal">
+      <div class="modal-content">
+          <h4>Feedback Submitted </h4>
+          <p>Would You Like to Send a Notification to the Contact Person ? <br/><b>Press "Send" to compose a Mail or press "Cancel" to dismiss.</b></p>
+      </div>
+      <div class="modal-footer">
+          <a href="#!"  class="modal-action modal-close waves-effect white-text pink waves-green btn-flat">Cancel</a>
+          <a href="#!" id="composeMail" class="modal-action modal-close waves-effect white-text teal waves-green btn-flat">Send</a>
+      </div>
+  </div>
+  <!--Modal Ends-->
+
+    <!--  Scripts-->
+    <!--Import App Constants-->
+    <script src="./js/constants.js"></script >
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="./js/cdn/jquery-3.2.1.min.js"></script>
+    <!-- Angular Material requires Angular.js Libraries -->
+     <script src="./js/cdn/angular.min.js"></script>
+     <script src="./js/cdn/angular-route.js"></script>
+     <script src="./js/cdn/angular-animate.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="./js/cdn/materialize.min.js"></script>
+    <!--Initalize MaterializeCSS-->
+    <script src="./js/init.js"></script>
+    <!--Firebase Admin-->
+    <script src="./js/firebase_admin.js" type="text/javascript"></script>
+
+</body>
+
+
+ <script>
+     //Global Variables
+     var imagePath = 'https://images.pexels.com/photos/580613/pexels-photo-580613.jpeg?h=350&auto=compress&cs=tinysrgb';
+
+  app = angular.module('VMS',['ngRoute', 'ngAnimate']);
+
+  app.controller('CategoryCtrl', function($scope, $rootScope) {
+
+    $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
+       $('.button-collapse').sideNav('hide');
+       $rootScope.animation = currRoute.animation;
+    });
+
+      //Variables
+      $scope.productQuantity = 0;
+      $scope.visitors = [{
+          face : imagePath,
+          Name: 'Ramesh',
+          contactPerson: 'Ritesh',
+          inTime: '3:08PM',
+          purpose: "Gardner",
+          passType :"Regular",
+          passID:"0"
+        }, {
+          face : 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?h=350&auto=compress&cs=tinysrgb',
+          Name: 'Suresh',
+          contactPerson: 'Sunit',
+          inTime: '3:08PM',
+          purpose: "Clean",
+          passType :"Regular",
+          passID:"1"
+
+        }, {
+          face : 'https://images.pexels.com/photos/428339/pexels-photo-428339.jpeg?h=350&auto=compress&cs=tinysrgb',
+          Name: 'Ganesh',
+          contactPerson: 'Geeta',
+          inTime: '3:08PM',
+          purpose: "Cook",
+          passType :"Temp",
+          passID:"3"
+        },
+        {
+         face : 'https://images.pexels.com/photos/462680/pexels-photo-462680.jpeg?h=350&auto=compress&cs=tinysrgb',
+         Name: 'Suresh',
+         contactPerson: 'Sunit',
+         inTime: '3:08PM',
+         purpose: "Clean",
+         passType :"Regular",
+         passID:"1"
+
+       }, ];
+
+       //Functions
+     $scope.increaseQuantity = function() {
+          $scope.productQuantity = $scope.productQuantity+1;
+        };
+      $scope.decreaseQuantity = function() {
+           $scope.productQuantity!=0 ? $scope.productQuantity = $scope.productQuantity-1: $scope.productQuantity = 0;
+        };
+
+
+                       $scope.rowData = {
+                                stocks:[
+                                       {name:'Aditya Birla',price:70},
+                                       {name:'Ambuja Cements',price:80},
+                                       {name:'TCS',price:65.00},
+                                       {name:'Infosys',price:75},
+                                       {name:'Wipro',price:67}
+                                    ],
+
+                                  stockNames: ['giraffes', 'orangutans', 'monkeys'],
+                                  stockValues: [20, 14, 23],
+
+                        },
+
+                     $scope.addRow = function(name, value) {
+                       $scope.rowData.stocks.push(  {name:'Stock ' + $scope.stockCounter , price:70});
+                       $scope.stockCounter++;
+                     }
+    });
+
+  //var visitorReference = firebase.database().ref().child('Lorelle'+AppConstants.VISTOR_END_POINT);
+  //  visitorReference.on('value', function(snapshot) {
+  //    console.log(snapshot.val());
+  //  });
+
+    app.config(function($routeProvider, $locationProvider){
+
+    $routeProvider
+    .when("/", {
+       templateUrl : "./templates/visitors.html",
+    })
+    .when('/visitors',{
+     templateUrl : "./templates/visitors.html",
+      animation: 'first',
+
+    })
+    .when('/form',{
+      templateUrl : "./templates/form.html",
+      animation: 'second',
+    })
+    .when('/report',{
+      templateUrl : "./templates/report.html",
+      animation: 'first',
+    })
+    .when('/about',{
+      templateUrl : "./templates/about.html",
+      animation: 'first',
+    })
+    .otherwise({
+      template: "<div class='box n'>Well... Hello There</div>",
+      animation: 'welcome'
+    });
+	});
+
+</script>
+
+</body>
+</html>

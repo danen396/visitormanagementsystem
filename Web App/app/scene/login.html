@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vistor Managment|Auth</title>
+    <meta name="author" content="Hitesh Sahu"/>
+    <!--Fuck Internet Explorer-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+    <!--PWA MAnifest-->
+    <link rel="manifest" href="./manifest.json" />
+
+
+    <!-- Chrome, Firefox OS and Opera theme color-->
+    <meta name="theme-color" content="#37474f">
+
+    <!--Change the status bar appearance in iOS devices-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+    "/>
+    <!-- icon in the highest resolution, Chrome and Opera uses icon.png, which is scaled to the necessary size by the device. -->
+    <link rel="icon" sizes="192x192" href="./assets/img/icon.png">
+    <!-- reuse same icon for Safari and add more supported size for other iOS devices-->
+    <link rel="apple-touch-icon" href="./assets/img/icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/icon.png">
+    <!-- multiple icons for IE -->
+    <meta name="msapplication-square70x70logo" content="./assets/img/icon.png">
+    <meta name="msapplication-square150x150logo" content="./assets/img/icon.png">
+    <meta name="msapplication-wide310x150logo" content="./assets/img/icon.png">
+    <!-- apple-->
+    <link rel="apple-touch-startup-image" href="./assets/img/icon.png">
+
+      <!---------------------------CSS ------------------------------->
+       <!-- Compiled and minified CSS -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+       <!--Let browser know website is optimized for mobile-->
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Font Awesome-->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+              type="text/css" rel="stylesheet" media="screen,projection"/>
+        <!--Custom SetUp-->
+        <link rel="stylesheet" href="./css/style.css">
+
+
+      <!---------------------------FIREBASE------------------------------->
+      <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
+</head>
+<body >
+<form id="form1">
+    <!--Header-->
+    <nav role="navigation">
+        <div class="nav-wrapper">
+            <a class="brand-logo center yellow_fire">Vistor Managment</a>
+        </div>
+    </nav>
+    <!--Loading Indicator-->
+   <div class="progress"  id= "progress">
+       <div class="indeterminate"></div>
+   </div>
+
+    <main>
+    <!--Sign In card-->
+    <div class="row ">
+        <!--Branding logo-->
+        <div class="col s12 center-align center" style="margin-top: 1%">
+            <img src="./assets/img/icon.png" alt="App Logo" class="responsive-img"
+                 style="width:100px ; height :100px"/>
+        </div>
+        <div class="col s12 m6 offset-m3">
+            <div class="card sticky-action z-depth-4 card-panel hoverable"
+                 style=" margin : 0px; padding : 2px">
+
+                <!--Login fields-->
+                <div class="card-content" >
+                    <div class="row center-align">
+                        <span class="card-title grey-text text-darken-4 center-align">Sign In</span>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix center">account_circle</i>
+                            <input value="hiteshkumarsahu1990@gmail.com" id="user" name="user"
+                                   type="text" class="validate left-align" required="required"
+                                   placeholder="UserMailID"/>
+                            <label for="user" class="left-align">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix center">dialpad</i>
+                            <input value="Qazwsx1!" id="pass" name="pass" type="password"
+                                   class="validate" required="required" placeholder="Password"/>
+                            <label for="pass" class=" left-align">Password</label>
+                        </div>
+
+                        <a type="button" class="waves-effect waves-light btn"
+                               id="submit" onclick="signIn()">Login</a>
+                    </div>
+                </div>
+
+                <!--More actions -->
+                <div class="card-action "
+                     style=" margin : 2px; padding-bottom:0px ;padding-top : 5px">
+                    <div class="row ">
+
+                            <div class="col s6 left-align valign-wrapper">
+                                <a href="#" class="activator btn"> <i
+                                        class=" fa fa-rocket orange-text" aria-hidden="true"></i>
+                                    SignUp</a>
+                            </div>
+                            <div class="col s6 right">
+                                <a data-target="ResetPassDialog" class="btn modal-trigger" class="right"><i
+                                        class="fa fa-key  orange-text" aria-hidden="true"></i>
+                                    Forgot Password</a>
+                            </div>
+
+                    </div>
+                </div>
+
+                <!--Hidden Actions For SignUp-->
+                <div class="card-reveal">
+                    <div class="row center-align">
+                        <span class="card-title grey-text text-darken-4">Sign Up<i
+                                class="material-icons right">close</i></span>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix center">account_circle</i>
+                            <input id="idsignup" type="text" class="validate left-align"
+                                   required="required" placeholder="User Mail ID"/>
+                            <label for="idsignup" class="left-align">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix center">dialpad</i>
+                            <input id="passsignup" type="password" class="validate"
+                                   required="required" placeholder="Password"/>
+                            <label for="passsignup" class=" left-align">Password</label>
+                        </div>
+                        <input type="button" class="waves-effect waves-light btn"
+                               value="Signup" id="signup" onclick="signUp()"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</main>
+
+
+<!--Footer-->
+<footer class="page-footer ">
+    <div class="container white-text">
+        <h5 class="white-text">Vistor Managment</h5>
+        <p>Visitor Mangment App build with HTML5, AngularJS, Spring Hibernate. </p>
+    </div>
+
+    <div class="container">
+              <div class="row">
+
+                   <div class="col s1">
+                     <a href = https://github.com/hiteshsahu
+                     class ="tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="GitHub" target="_blank">
+                     <i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href= https://www.linkedin.com/in/hitesh-sahu-99639040
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50"
+                     data-tooltip="Linkedin" target="_blank">
+                    <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=http://stackoverflow.com/users/2252113/hitesh-sahu
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="StackOverflow"  target="_blank" >
+                    <i class="fa fa-stack-overflow fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://codepen.io/hiteshsahu/
+                      class="tooltipped white-text" data-position="bottom"
+                      data-delay="50" data-tooltip="Codepen"
+                      target="_blank" >
+                      <i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://twitter.com/HiteshSahu_" class="tooltipped white-text"
+                     data-position="bottom" data-delay="50" data-tooltip="Twitter"
+                    target="_blank">
+                    <i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://www.facebook.com/HitsDroid
+                     class=" tooltipped white-text" data-position="bottom"
+                     data-delay="50" data-tooltip="Facebook"
+                     target="_blank">
+                     <i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                   </div>
+
+                   <div class="col s1">
+                     <a href=https://plus.google.com/u/0/+HiteshSahu7
+                    class=" tooltipped white-text" data-position="bottom"
+                    data-delay="50" data-tooltip="Google plus"  target="_blank">
+                    <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
+                  </div>
+
+             </div>
+             </div>
+       <div class="footer-copyright  darken-4 ">
+           <div class="container">
+                    ©2017 <a class="brown-text text-lighten-3" href="http://hiteshsahu.com:">Hitesh Sahu All
+                    rights reserved.</a> |  <a href="#">Help</a> | <a href="#">Privacy & Terms</a>
+           </div>
+       </div>
+    </footer>
+
+    <!-- Modal Structure for Pass Resest -->
+    <div id="ResetPassDialog" class="modal bottom-sheet">
+        <div class="modal-content">
+            <div class="card-reveal">
+                <div class="row center-align">
+                    <span class="card-title grey-text text-darken-4">Reset Password<i
+                            class="material-icons right modal-action modal-close">close</i></span>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix center">account_circle</i>
+                        <input id="id_reset_pass" type="text" class="validate left-align"
+                               required="required" placeholder="User Mail ID"/>
+                        <label for="id_reset_pass" class="left-align">Please enter your Email Address</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer center-align">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn orange" style="margin-left:10px">CANCEL</a>
+            <input type="button" class="waves-effect waves-light btn green" value="Reset Password"
+                   id="resetPassword" onclick="resetPassword()" />
+        </div>
+    </div>
+
+<!--  Scripts-->
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="./js/cdn/jquery-3.2.1.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+ <script src="./js/cdn/angular.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="./js/cdn/materialize.min.js"></script>
+<!--Initalize MaterializeCSS-->
+<script src="./js/init.js"></script>
+
+<script type="text/javascript">
+        var email = document.getElementById("user");
+        var password = document.getElementById("pass");
+        var emailsignup = document.getElementById("idsignup");
+        var passwordsignup = document.getElementById("passsignup");
+        var emailresetpass = document.getElementById("id_reset_pass");
+        var passwordtemp = document.getElementById("pass_temp");
+        var passwordreal = document.getElementById("pass_real");
+        var attempt = 3; // Variable to count number of attempts.
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyAnp5M7JKSQVsmRQF1A_luz43U2DFStQ6I",
+          authDomain: "ecart-1d0ca.firebaseapp.com",
+          databaseURL: "https://ecart-1d0ca.firebaseio.com",
+          projectId: "ecart-1d0ca",
+          storageBucket: "ecart-1d0ca.appspot.com",
+          messagingSenderId: "404598332603"
+        };
+        firebase.initializeApp(config);
+       //Sign Up new User
+        function signUp()
+        {
+           firebase.auth().createUserWithEmailAndPassword(emailsignup.value, passwordsignup.value)
+           .then(function(user) {
+             //Success! user signed in
+             // Redirecting to other page.
+             window.location = "home.html";
+            })
+            .catch(function(error) {
+             // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            Materialize.toast('Sign Up Failed:'+ errorMessage, 5000, 'rounded');
+           });
+        };
+         //Reset Password
+        function resetPassword()
+        {
+          if(emailresetpass.value !=null && emailresetpass.value != "")
+          {
+            Materialize.toast('Invalid Email Address', 3000, 'rounded');
+             return;
+           }
+            $("#progress").show();
+            var auth = firebase.auth();
+            auth.sendPasswordResetEmail(emailresetpass.value).then(function() {
+              // Email sent.
+               Materialize.toast('Instruction to reset password has been send to your mail id', 3000, 'rounded');
+                $("#progress").hide();
+                }, function(error) {
+                $("#progress").hide();
+               // An error happened.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            Materialize.toast('Reset Password Failed:'+ errorMessage, 5000, 'rounded');
+            });
+        };
+        // Below function Executes on click of login button.
+              function signIn() {
+
+                    $("#progress").show();
+                    firebase.auth()
+                    .signInWithEmailAndPassword(email.value, password.value)
+                    .then(function(user) {
+                      //Success! user signed in
+                      // Redirecting to other page.
+                      window.location = "home.html";
+                      $("#progress").hide();
+                      return false;
+                     })
+                    .catch(function(error)
+                     {
+                     $("#progress").hide();
+                     // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // Decrementing by one.
+                    attempt--;
+                    if (errorCode === 'auth/wrong-password') {
+                        Materialize.toast('Login Failed: Wrong password, You have left ' + attempt + ' attempt', 5000, 'rounded');
+                      } else {
+                        Materialize.toast('Login Failed,'+ errorMessage +' You have left ' + attempt + ' attempt', 5000, 'rounded');
+                      }
+                     // Disabling fields after 3 attempts.
+                     if (attempt == 0) {
+                                document.getElementById("user").disabled = true;
+                                document.getElementById("pass").disabled = true;
+                                document.getElementById("submit").disabled = true;
+                                return false;
+                            }
+                      console.log(error);
+                    });
+              };
+              $(document).keypress(function (e) {
+                        if (e.which == 13) {
+                            signIn();
+                        }
+                });
+                $(document).ready(function () {
+                        Materialize.updateTextFields();
+                });
+</script>
+</body>
+</html>
