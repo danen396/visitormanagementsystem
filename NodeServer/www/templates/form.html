@@ -1,0 +1,157 @@
+
+<div>
+
+         <div id="test1" class="col s12">
+         <form name="visitorForm" ng-submit="submitMyForm()">
+
+            <div class="card-panel hoverable z-depth-2">
+                <h5 class="center grey-text">Insert Visitor Info</h5><br/>
+                <div class="row">
+
+                        <div class="input-field col s12 ">
+                            <h5 class="header red-text darken-4 center">Visitor Information</h5>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="visitorName" type="text" class="validate"   ng-model="Visitor.Name">
+                            <label for="visitorName">Visitor Name*</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">store</i>
+                            <input id="visitorAddress" type="text" class="validate"  ng-model="Visitor.Address">
+                            <label for="visitorAddress">Visitor Address*</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="vistorPhoneNumber" type="tel" class="validate"  pattern="[789][0-9]{9}"  ng-model="Visitor.Phone">
+                            <label for="vistorPhoneNumber">Visitor Contact No*</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">email</i>
+                            <input id="visitorEmail" type="email" class="validate"  ng-model="Visitor.Email">
+                            <label for="visitorEmail" data-error="wrong" data-success="right" >Visitor Email</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <p class="grey-text">Please select pass Type</p>
+                            <select single id="txtStrInstalledVersion" ng-model="Visitor.PassType">
+                                <option value="" disabled selected>Choose Pass Type</option>
+                                <option value="PERM">Regular</option>
+                                <option value="NEW">New</option>
+                                <option value="TEMP">Temperory</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field col s12 m6"  ng-model="PassID" >
+                            <i class="material-icons prefix">contacts</i>
+                            <input id="txtSalesEnggName" type="text" class="validate" disabled ng-model ="Visitor.PassID">
+                            <label for="txtSalesEnggName">Pass ID (Auto-Generated)</label>
+                        </div>
+
+                        <div class="input-field col s12 m6"  ng-model="Visitor.VehicleNumber" >
+                            <i class="material-icons prefix">directions_car</i>
+                            <input id="vehicleNumber" class="validate">
+                            <label for="vehicleNumber">Vehicle Number</label>
+                        </div>
+
+                         <!-----------Contact Info------------------>
+                        <div class="input-field col s12">
+                            <h5 class="header red-text darken-4 center">Contact Person Information</h5>
+                        </div>
+
+                       <div class="input-field col s12 m6">
+                          <i class="material-icons prefix">account_circle</i>
+                          <input id="hostName" type="text" class="validate" ng-model="Visitor.Host.Name" >
+                          <label for="hostName">Contact Person Name*</label>
+                       </div>
+
+                       <div class="input-field col s12 m6">
+                          <i class="material-icons prefix">work</i>
+                          <input id="hostDesignation" type="text" class="validate"  ng-model="Visitor.Host.Department">
+                          <label for="hostDesignation"> Department/Office</label>
+                       </div>
+
+                       <div class="input-field col s12 m6">
+                           <i class="material-icons prefix">domain</i>
+                           <input id="hostHouse" type="text" class="validate" ng-model="Visitor.Host.HouseNumber">
+                           <label for="hostHouse">Building/Flat Number</label>
+                       </div>
+
+                       <div class="input-field col s12 m6">
+                          <i class="material-icons prefix">phonelink_ring</i>
+                          <input id="hostMobile" type="tel" class="validate"  ng-pattern="/^(?:\d{10}|\w+@\w+\.\w{2,3})$/" ng-model="Visitor.Host.ContactMobile">
+                          <label for="hostMobile">Contact Mobile</label>
+                       </div>
+
+                       <div class="input-field col s12 m6">
+                          <i class="material-icons prefix">message</i>
+                          <textarea id="purpose" class="materialize-textarea" ng-model="Visitor.Purpose"></textarea>
+                          <label for="purpose">Purpose Of Meeting</label>
+                      </div>
+
+                     <!--Guard Info-->
+                      <div class="input-field col s12 red-text darken-4 center">
+                            <h5 class="header">Guard On Duty</h5>
+                      </div>
+
+                      <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">contacts</i>
+                        <input id="guardName" type="text" class="validate" disabled ng-model="Visitor.GuardName">
+                        <label for="guardName">Pass Created By (Guard Name)*</label>
+                      </div>
+
+                       <div class="input-field col s12 m6">
+                         <i class="material-icons prefix">priority_high</i>
+                         <input id="gateNum" type="text" class="validate" ng-model="Visitor.GateNumber">
+                         <label for="gateNum">Gate Number</label>
+                      </div>
+
+                      <div class="input-field col s6">
+                          <i class="material-icons prefix">alarm</i>
+                          <label for="EntryTime">Entry Time*</label>
+                          <input id="EntryTime" type="text" class="timepicker" ng-model="Visitor.EntryTime">
+                        </div>
+
+                      <div class="input-field col s6">
+                          <i class="material-icons prefix">event</i>
+                          <label for="EntryDate">Entry Date*</label>
+                          <input id="EntryDate" type="text" class="datepicker" ng-model="Visitor.EntryDate">
+                      </div>
+
+                     <div class="input-field col s6">
+                        <i class="material-icons prefix">alarm</i>
+                        <input id="ExitTime" type="text"  class="timepicker selected" ng-model="Visitor.ExitTime">
+                        <label for="ExitTime" class='active'>Exit Time*</label>
+                     </div>
+
+                     <div class="input-field col s6">
+                        <i class="material-icons prefix">event</i>
+                        <label for="EntryTime" class='active'>Entry Date*</label>
+                        <input id="ExitDate" type="text" class="datepicker" ng-model="Visitor.ExitDate">
+                     </div>
+
+                    <div class=" col s12">
+                         <div class="center">
+                            <input  class="btn waves-effect waves-light red center btn-large "  type="submit" id="btnCFB">
+                            </input>
+                        </div>
+                  </div>
+
+                </div>
+                <!-----ROW END------------>
+            </div>
+            <!------------CARD END--------------------------->
+            <!--Camera-->
+            <div class="fixed-action-btn">
+             <a  href="#takePicModal" class="btn-floating btn-large orange pulse tooltipped modal-trigger waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Take Picture">
+               <i class="large material-icons">photo_camera</i>
+              </a>
+            </div>
+
+         </form>
+        </div>
+</div>

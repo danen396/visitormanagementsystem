@@ -1,0 +1,92 @@
+<div class ="container">
+
+  <!-- Switch -->
+  <div class="switch" ng-init="showGrid = true">
+    <label>
+      List Mode
+      <input type="checkbox"  checked ={{showGrid}} ng-model="showGrid">
+      <span class="lever"></span>
+      Grid Mode
+    </label>
+  </div>
+
+<!--List Starts-->
+<div class="row" ng-if="showGrid == false">
+<div ng-repeat="visitor in visitors">
+    <!--Card Starts-->
+<div class="col s10 offset-s1 card-panel hover" style="padding: 2px">
+
+   <div class="card-image valign-wrapper col s2" >
+       <div class="valign">
+            <img class="responsive-img media_image" style="background-size: cover;
+background-position: center;" ng-src={{visitor.face}} altSrc="{{'./assets/img/PlaceHolder/user_place_holder.png'}}" onerror="this.src = $(this).attr('altSrc')" />
+       </div>
+   </div>
+
+  <div  class ='col s10 card-content'>
+       <h5 class="grey-text">{{visitor.Name}}</h5>
+       <p>{{visitor.purpose}}</p>
+    <div class="card-action">
+      <a href="#">In: {{visitor.inTime}}</a>
+    </div>
+  </div>
+</div>
+<!--Card End-->
+</div>
+</div>
+<!--List Ends-->
+
+<!--Grid Starts-->
+<div class="row" ng-if="showGrid == true">
+<div class="col s12 m4 l3" ng-repeat="visitor in visitors">
+<!--Card Starts-->
+  <div  class="card sticky-action small">
+    <div class="card-image">
+      <img ng-src={{visitor.face}} class= "activator" altSrc="{{'./assets/img/PlaceHolder/user_place_holder.png'}}" onerror="this.src = $(this).attr('altSrc')">
+      <!-- <a class="btn-floating halfway-fab waves-effect waves-light red btn-large"><i class="material-icons">add</i></a> -->
+    </div>
+
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{visitor.Name}}<i class="material-icons right">more_vert</i></span>
+      <p><a href="#">{{visitor.purpose}}</a></p>
+    </div>
+
+   <div class="card-reveal">
+     <span class="card-title grey-text text-darken-4">{{visitor.Name}}<i class="material-icons right">close</i></span>
+
+     <table>
+      <tbody>
+        <tr>
+          <td><label>Contact Name</label></td>
+          <td>{{visitor.contactPerson}}</td>
+        </tr>
+        <tr>
+          <td><label>Purpose</label></td>
+          <td>{{visitor.purpose}}</td>
+        </tr>
+        <tr>
+          <td><label>Pass/ID</label></td>
+          <td>{{visitor.passType}}/{{visitor.passID}}</td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+
+     <div class="card-action">
+      <a href="#">In: {{visitor.inTime}}</a>
+    </div>
+  </div>
+ <!--Card End-->
+
+</div>
+</div>
+<!--Grid End-->
+
+<!--Toggle Grid-->
+<div class="fixed-action-btn">
+<a class="btn-floating btn-large red">
+<i class="large material-icons">mode_edit</i>
+</a>
+</div>
+
+</div>

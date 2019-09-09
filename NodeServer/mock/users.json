@@ -1,0 +1,39 @@
+
+ [
+   {
+       "face" :"https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?h=350&auto=compress&cs=tinysrgb",
+       "Name": "Hitesh",
+       "contactPerson": "Ritesh",
+       "inTime": "3:08PM",
+       "purpose": "Gardner",
+       "passType" :"Regular",
+       "passID":"0"
+     }, {
+       "face" : "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?h=350&auto=compress&cs=tinysrgb",
+       "Name": "Suresh",
+       "contactPerson": "Sunit",
+       "inTime": "3:08PM",
+       "purpose": "Clean",
+       "passType" :"Regular",
+       "passID":"1"
+
+     }, {
+       "face" : "https://images.pexels.com/photos/428339/pexels-photo-428339.jpeg?h=350&auto=compress&cs=tinysrgb",
+       "Name": "Ganesh",
+       "contactPerson": "Geeta",
+       "inTime": "3:08PM",
+       "purpose": "Cook",
+       "passType" :"Temp",
+       "passID":"3"
+     },
+     {
+      "face" : "https://images.pexels.com/photos/462680/pexels-photo-462680.jpeg?h=350&auto=compress&cs=tinysrgb",
+      "Name": "Suresh",
+      "contactPerson": "Sunit",
+      "inTime": "3:08PM",
+      "purpose": "Clean",
+      "passType" :"Regular",
+      "passID":"1"
+
+    }
+ ]
